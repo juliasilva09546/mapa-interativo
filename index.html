@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade da Memória Perdida</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="img/mapa-regioes.png" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- LOGIN E CADASTRO -->
+<section id="auth" class="auth">
+    <div class="authbox">
+        <div class="mark">⌖</div>
+
+        <small>MEMÓRIAS QUE CONECTAM</small>
+
+        <h1>Comunidade da<br><em>Memória Perdida</em></h1>
+
+        <p>
+            Um espaço para registrar histórias, lugares e lembranças
+            da nossa comunidade.
+        </p>
+
+        <div class="tabs">
+            <button class="active" data-tab="login">Entrar</button>
+            <button data-tab="register">Criar conta</button>
+        </div>
+
+        <form id="login">
+            <label>
+                E-mail
+                <input id="le" type="email" required placeholder="Seu e-mail">
+            </label>
+
+            <label>
+                Senha
+                <input id="lp" type="password" required placeholder="Sua senha">
+            </label>
+
+            <button class="btn">Entrar na comunidade →</button>
+        </form>
+
+        <form id="register" class="hide">
+            <label>
+                Nome completo
+                <input id="rn" required placeholder="Digite seu nome">
+            </label>
+
+            <label>
+                Data de nascimento
+                <input id="rb" type="date" required>
+            </label>
+
+            <label>
+                E-mail
+                <input id="re" type="email" required placeholder="Digite seu e-mail">
+            </label>
+
+            <label>
+                Senha
+                <input id="rp" type="password" minlength="4" required>
+            </label>
+
+            <label>
+                Confirmar senha
+                <input id="rc" type="password" minlength="4" required>
+            </label>
+
+            <button class="btn">Criar minha conta →</button>
+        </form>
+
+        <p id="authmsg" class="msg"></p>
+
+        <small>Protótipo acadêmico: dados salvos neste navegador.</small>
+    </div>
+</section>
+
+<!-- SISTEMA PRINCIPAL -->
+<div id="app" class="hide">
+
+    <!-- MENU LATERAL -->
+    <aside>
+        <div class="logo">
+            ⌖
+            <b>Comunidade da<br>Memória Perdida</b>
+        </div>
+
+        <div class="user">
+            <span id="initial">M</span>
+            <div>
+                <b id="sideName">Morador</b>
+                <small>Integrante da comunidade</small>
+            </div>
+        </div>
+
+        <nav>
+            <button data-page="home">⌂　Início</button>
+            <button data-page="council">♧　Conselho</button>
+            <button data-page="archive">▤　Arquivo</button>
+            <button data-page="maps">⌖　Mapas</button>
+            <button data-page="wallet">▣　Carteira do Morador</button>
+        </nav>
+
+        <button id="logout" class="logout">↪ Sair da conta</button>
+    </aside>
+
+    <main>
+
+        <header>
+            <div>
+                <small>ESPAÇO COMUNITÁRIO</small>
+                <h2 id="heading">Painel principal</h2>
+            </div>
+            <span id="date"></span>
+        </header>
+
+        <!-- INÍCIO -->
+        <section id="home" class="page">
+
+            <div class="hero">
+                <small>BEM-VINDO(A) DE VOLTA</small>
+
+                <h1>Olá, <span id="hello">morador</span>!</h1>
+
+                <p>
+                    Suas memórias ajudam a preservar a identidade
+                    da nossa comunidade.
+                </p>
+
+                <button class="btn light" data-page="new">
+                    Registrar uma memória →
+                </button>
+            </div>
+
+            <div class="stats">
+                <article>
+                    <b id="count">0</b>
+                    <small>Memórias registradas</small>
+                </article>
+
+                <article>
+                    <b>12</b>
+                    <small>Regiões mapeadas</small>
+                </article>
+
+                <article>
+                    <b>5000</b>
+                    <small>Moradores na comunidade</small>
+                </article>
+            </div>
+
+            <div class="columns">
+
+                <article class="card">
+                    <h3>Mapa das regiões</h3>
+                    <p>Selecione uma região para conhecer mais.</p>
+
+                    <img
+                        class="preview"
+                        src="mapa-regioes.png"
+                        alt="Mapa da comunidade"
+                    >
+
+                    <button class="btn" data-page="maps">
+                        Explorar mapa →
+                    </button>
+                </article>
+
+                <article class="card beige">
+                    <h3>Uma comunidade é feita de histórias.</h3>
+
+                    <p>
+                        Compartilhe lembranças, fotografias e relatos
+                        que merecem continuar vivos.
+                    </p>
+
+                    <button class="btn" data-page="new">
+                        Compartilhar lembrança
+                    </button>
+                </article>
+
+            </div>
+
+            <h3>Últimas memórias</h3>
+            <div id="recent" class="memorylist"></div>
+
+        </section>
+
+        <!-- MAPAS -->
+        <section id="maps" class="page hide">
+
+            <small class="eyebrow">TERRITÓRIO E IDENTIDADE</small>
+
+            <h1>Mapa da comunidade</h1>
+
+            <p>
+                Explore as regiões. Clique em uma área numerada
+                para visualizar suas informações.
+            </p>
+
+            <div class="maplayout">
+
+                <div class="card">
+
+                    <h3>Mapa ilustrado — 12 regiões</h3>
+
+                    <div class="mapwrap">
+
+                        <img
+                            src="mapa-regioes.png"
+                            alt="Mapa das 12 regiões"
+                        >
+
+                        <!-- ÁREAS CLICÁVEIS DO MAPA -->
+                        <svg viewBox="0 0 961 641"
+                             preserveAspectRatio="none"
+                             id="hotspots">
+
+                            <polygon data-r="1" points="52,90 115,55 170,130 154,225 105,300 55,245"/>
+
+                            <polygon data-r="2" points="24,420 105,390 175,475 150,575 55,590 25,520"/>
+
+                            <polygon data-r="3" points="215,175 320,145 380,230 350,325 255,335 190,270"/>
+
+                            <polygon data-r="4" points="200,340 330,325 405,410 365,510 260,535 180,455"/>
+
+                            <polygon data-r="5" points="95,100 205,80 265,160 235,255 150,290 95,220"/>
+
+                            <polygon data-r="6" points="365,350 470,315 545,390 525,510 430,565 355,475"/>
+
+                            <polygon data-r="7" points="420,220 520,175 570,260 540,350 455,370 400,300"/>
+
+                            <polygon data-r="8" points="270,20 425,15 500,100 445,185 335,160 270,95"/>
+
+                            <polygon data-r="9" points="485,390 560,355 580,465 540,590 465,570 450,475"/>
+
+                            <polygon data-r="10" points="470,180 550,120 575,225 550,315 500,330 455,270"/>
+
+                            <polygon data-r="11" points="350,300 440,280 495,370 465,455 380,445 330,375"/>
+
+                            <polygon data-r="12" points="345,500 455,500 560,570 520,630 390,630 325,565"/>
+
+                        </svg>
+                    </div>
+
+                    <p class="hint">
+                        ⌖ Clique em uma região do mapa para ver os detalhes.
+                    </p>
+
+                    <div class="regiongrid" id="regiongrid"></div>
+
+                </div>
+
+                <article class="card details" id="details">
+                    <small>DETALHES DO MAPA</small>
+                    <div class="big">⌖</div>
+                    <h2>Escolha uma região</h2>
+                    <p>
+                        Clique em uma área numerada do mapa
+                        para descobrir as informações correspondentes.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- NOVA MEMÓRIA -->
+        <section id="new" class="page hide">
+
+            <small class="eyebrow">REGISTRO COMUNITÁRIO</small>
+
+            <h1>Registrar uma memória</h1>
+
+            <p>Conte uma história ou compartilhe uma lembrança importante.</p>
+
+            <form id="memoryform" class="card formgrid">
+
+                <label>
+                    Título da memória
+                    <input id="mt" required maxlength="90"
+                           placeholder="Ex.: A antiga praça">
+                </label>
+
+                <label>
+                    Nome de quem registra
+                    <input id="ma" required>
+                </label>
+
+                <label>
+                    Data do acontecimento
+                    <input id="md" type="date" required>
+                </label>
+
+                <label>
+                    Região
+                    <select id="mr" required>
+                        <option value="">Selecione</option>
+                    </select>
+                </label>
+
+                <label class="wide">
+                    Local (opcional)
+                    <input id="mp" placeholder="Rua, praça, construção...">
+                </label>
+
+                <label class="wide">
+                    Relato / descrição
+                    <textarea id="ms" rows="6" required maxlength="1500"></textarea>
+                </label>
+
+                <label class="wide">
+                    Fotografia ou documento (opcional)
+                    <input id="mf" type="file" accept="image/*,.pdf">
+                    <small>
+                        O anexo não é enviado para servidor nesta demonstração.
+                    </small>
+                </label>
+
+                <button class="btn wide">Salvar memória →</button>
+
+                <p id="memmsg" class="msg wide"></p>
+
+            </form>
+        </section>
+
+        <!-- ARQUIVO -->
+        <section id="archive" class="page hide">
+
+            <small class="eyebrow">HISTÓRIAS COMPARTILHADAS</small>
+
+            <h1>Arquivo comunitário</h1>
+
+            <p>Consulte os relatos registrados pelos moradores.</p>
+
+            <div class="filters">
+                <input id="search" placeholder="Buscar memória...">
+
+                <select id="filter">
+                    <option value="">Todas as regiões</option>
+                </select>
+            </div>
+
+            <div id="allmem" class="memorylist"></div>
+
+        </section>
+
+        <!-- CONSELHO -->
+        <section id="council" class="page hide">
+
+            <small class="eyebrow">PARTICIPAÇÃO</small>
+
+            <h1>Conselho comunitário</h1>
+
+            <article class="card">
+                <h2>Construindo a memória coletiva</h2>
+
+                <p>
+                    Espaço para moradores valorizarem histórias locais,
+                    sugerirem temas de pesquisa e contribuírem com a
+                    preservação do patrimônio comunitário.
+                </p>
+
+                <p>01 · Compartilhar histórias</p>
+                <p>02 · Identificar lugares importantes</p>
+                <p>03 · Preservar registros históricos</p>
+            </article>
+
+        </section>
+
+        <!-- CARTEIRA DO MORADOR -->
+        <section id="wallet" class="page hide">
+
+            <small class="eyebrow">SEU PERFIL</small>
+
+            <h1>Carteira do morador</h1>
+
+            <article class="card">
+                <div class="big" id="walletinitial">M</div>
+                <h2 id="walletname">Morador</h2>
+                <p id="wallemail"></p>
+                <span class="tag">Integrante da comunidade</span>
+            </article>
+
+            <p class="warning">
+                Protótipo: seus dados ficam somente neste navegador.
+                Não utilize senhas reais ou informações sensíveis.
+            </p>
+
+        </section>
+
+        <footer>
+            Comunidade da Memória Perdida
+            <i>Memórias que conectam nossa comunidade.</i>
+        </footer>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
